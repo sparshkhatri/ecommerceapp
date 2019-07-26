@@ -1,0 +1,86 @@
+<form #f="ngForm">
+  <div class="billing-form bg-light p-3 p-md-5">
+  <h3 class="mb-4 billing-heading">Billing Details</h3>
+  <div class="row align-items-end">
+    <div class="col-md-12">
+      <div class="form-group">
+        <label for="">Name</label>
+        <input #name="ngModel" name="name" [(ngModel)]="shipping.name" type="text" class="form-control" required>
+        <div class="alert alert-danger" *ngIf="name.touched && name.invalid">
+          <div *ngIf="name.errors.required">Name is required.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-12">
+      <div class="form-group">
+        <label for="">Address</label>
+        <input #addressLine1="ngModel" name="addressLine1" [(ngModel)]="shipping.addressLine1" type="text"
+          class="form-control" required>
+        <div class="alert alert-danger" *ngIf="addressLine1.touched && addressLine1.invalid">
+          <div *ngIf="addressLine1.errors.required">Address Line 1 is required.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-12">
+      <div class="form-group">
+        <label for=""></label>
+        <input #addressLine2="ngModel" name="addressLine2" [(ngModel)]="shipping.addressLine2" type="text"
+          class="form-control" required>
+        <div class="alert alert-danger" *ngIf="addressLine2.touched && addressLine2.invalid">
+          <div *ngIf="addressLine2.errors.required">Address Line 2 is required.</div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-12">
+      <div class="form-group">
+        <label for="">City</label>
+        <input #city="ngModel" name="city" [(ngModel)]="shipping.city" type="text" class="form-control" required>
+        <div class="alert alert-danger" *ngIf="city.touched && city.invalid">
+          <div *ngIf="city.errors.required">City is required.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row mt-5 pt-3 d-flex">
+    <div class="col-md-6 d-flex">
+      <div class="cart-detail cart-total bg-light p-3 p-md-4">
+        <h3 class="billing-heading mb-4">Order Summary</h3>
+        <p class="card-text">You have {{ cart.totalItemsCount }} items in your shopping cart.</p>
+        <p class="d-flex" *ngFor="let item of cart.items">
+            <span>{{ item.quantity }} x {{ item.title }}</span>
+            <span class="text-right">{{ item.totalPrice | currency:'USD':true }}</span>
+          </p>
+        <hr>
+        <p class="d-flex total-price">
+          <span>Total</span>
+          <span class="text-right">{{ cart.totalPrice | currency:'USD':true }}</span>
+        </p>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="cart-detail bg-light p-3 p-md-4">
+        <h3 class="billing-heading mb-4">Payment Method</h3>
+        <div class="form-group">
+          <div class="col-md-12">
+            <div class="radio">
+              <label><input type="radio" name="optradio" class="mr-2" checked="checked"> Cash on delivery</label>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-md-12">
+            <div class="checkbox">
+              <label><input type="checkbox" value="" class="mr-2" required> I have read and accept the terms and conditions</label>
+            </div>
+          </div>
+        </div>
+        <p>
+          <button [disabled]="!f.valid" (click)="placeOrder()" class="btn btn-primary py-3 px-4">Place Order</button>
+        </p>
+      </div>
+    </div>
+  </div>
+</form>
