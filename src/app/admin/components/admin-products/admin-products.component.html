@@ -1,0 +1,64 @@
+<div class="hero-wrap hero-bread" style="background-image: url('assets/images/bg_6.jpg');">
+  <div class="container">
+    <div class="row no-gutters slider-text align-items-center justify-content-center">
+      <div class="col-md-9 text-center">
+        <h1 class="mb-0 bread">Manage Products</h1>
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+<section class="bg-light">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 py-5 wrap-about pb-md-12">
+        <div class="pb-md-5">
+            <p>
+                <a routerLink="/admin/products/new" class="btn btn-primary">New Product</a>
+              </p>
+              <p>
+                <input 
+                  #query
+                  (keyup)="filter(query.value)"
+                  type="text" class="form-control" placeholder="Search...">
+              </p>
+              
+              <data-table
+                [items]="items"
+                [itemCount]="itemCount"
+                (reload)="reloadItems($event)">
+                <data-table-column
+                  [property]="'title'"  
+                  [header]="'Title'"
+                  [sortable]="true"
+                  [resizable]="true"
+                >
+                </data-table-column>
+                
+                <data-table-column
+                  [property]="'price'"  
+                  [header]="'Price'"
+                  [sortable]="true"
+                  [resizable]="true"
+                >
+                  <ng-template #dataTableCell let-item="item">
+                    {{ item.price | currency:'USD':true }}
+                  </ng-template>
+                </data-table-column>
+              
+                <data-table-column
+                  [property]="'$key'"  
+                >
+                  <ng-template #dataTableCell let-item="item">
+                    <a [routerLink]="['/admin/products/', item.$key]">Edit</a>
+                  </ng-template>
+                </data-table-column>
+              
+              </data-table>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+

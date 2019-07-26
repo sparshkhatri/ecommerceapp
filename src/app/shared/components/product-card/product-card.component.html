@@ -1,0 +1,25 @@
+
+<div *ngIf="product.title" class="product">
+    <div class="img-prod">
+      <img *ngIf="product.imageUrl" class="img-fluid" [src]="product.imageUrl" alt="{{ product.title }}" />
+	  </div>
+	  <div class="text py-3 px-3">
+		<h3>{{ product.title }}</h3>
+		<div class="d-flex">
+		  <div class="pricing">
+			<p class="price"><span>{{ product.price | currency:'USD':true }}</span></p>
+		  </div>
+		</div>
+    <hr>
+    <p *ngIf="showActions && shoppingCart" class="bottom-area d-flex">
+        <a 
+          *ngIf="shoppingCart.getQuantity(product) === 0; else updateQuantity"
+          (click)="addToCart()"
+          class="add-to-cart cursor-pointer"><span>Add to cart <i class="ion-ios-add ml-1"></i></span></a>
+        <ng-template #updateQuantity>
+          <product-quantity class="qty-selectors" [product]="product" [shopping-cart]="shoppingCart">
+          </product-quantity>
+        </ng-template>
+      </p>
+	  </div>
+	</div>

@@ -1,0 +1,7 @@
+
+.dropdown-toggle { 
+  cursor: pointer;
+}
+.dropdown-menu{
+  top: 70px !important;
+}
